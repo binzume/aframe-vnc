@@ -17,6 +17,7 @@ T.B.D.
 or
 
 - https://github.com/etiennepinchon/aframe-material
+- https://github.com/binzume/aframe-xylayout
 
 ```html
 <a-xywindow id="vnc" position="0 0 -8" title="VNC Client" width="16" height="9">

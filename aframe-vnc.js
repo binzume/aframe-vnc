@@ -35,8 +35,6 @@ AFRAME.registerComponent('vncclient', {
 
         if (this.data.dialog) {
             var dialog = this.data.dialog;
-            dialog.querySelector("[name=vnc_address]").value = localStorage.getItem('vnc_address') || (window.location.hostname + ":6080");
-            dialog.querySelector("[name=vnc_password]").value = localStorage.getItem('vnc_password') || "";
             dialog.querySelector("[name=vnc_connect]").addEventListener('click', (ev) => {
                 var address = dialog.querySelector("[name=vnc_address]").value;
                 var password = dialog.querySelector("[name=vnc_password]").value;
@@ -45,7 +43,13 @@ AFRAME.registerComponent('vncclient', {
                 dialog.setAttribute('visible', false);
                 this.connect(address, password);
             });
+            dialog.addEventListener('loaded', (ev) => {
+                dialog.querySelector("[name=vnc_address]").value = localStorage.getItem('vnc_address') || (window.location.hostname + ":6080");
+                dialog.querySelector("[name=vnc_password]").value = localStorage.getItem('vnc_password') || "";
+            });
         }
+    },
+    update: function() {
     },
     tick: function () {
         if (!this.connected) return;
@@ -64,6 +68,10 @@ AFRAME.registerComponent('vncclient', {
                 }
             }
         }
+    },
+    remove: function () {
+        if (!this.connected) return;
+        this.rfb.disconnect();
     },
     connect: function (url, password) {
         /// TODO: token parameter for nova-novncproxy.
