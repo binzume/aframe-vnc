@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>VNC Client</title>
+  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@0642e09bbdc8e7539a0608672a5f0197fbf3d21e/dist/aframe-master.min.js"></script>
+  <script src="https://binzume.github.io/aframe-xylayout/dist/xylayout-all.min.js?"></script>
+  <script src="aframe-vnc.js" class='required'></script>
+</head>
+
+<body style="background-color: black; color:white;">
+  <a-scene>
+
+    <a-entity id="app-vnc">
+      <a-xywindow position="0 1.5 -3" scale='0.4 0.4 0.4' title="VNC Client" width="16" height="9">
+        <a-vnc width="16" height="9" dialog="#vncdialog" class="clickable"></a-vnc>
+        <a-xycontainer id="vncdialog" direction="column" xyitem="fixed:true" padding="0.2" spacing="0.1" position="0 0 0.1" width="3" height="2">
+            <a-entity xyitem="fixed:true" position="0 0 -0.05" geometry="primitive:xy-rounded-rect;width:3;height:2" material="color:#444"></a-entity>
+            <a-xyinput xyrect name="vnc_address" placeholder="host:port" color="black" width="2.5" height="0.4"></a-xyinput>
+            <a-xyinput xyrect name="vnc_password" placeholder="Password" type="password" color="black" width="2.5" height="0.4"></a-xyinput>
+            <a-xybutton name="vnc_connect" xyitem="align:end" label="Connect"></a-xybutton>
+        </a-xycontainer>
+      </a-xywindow>
+    </a-entity>
+
+  </a-scene>
+</body>
+
+</html>
